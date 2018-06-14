@@ -1,0 +1,71 @@
+<main role="main" class="container">
+    <div class="jumbotron text-center">
+        <h1 class="display-4">User Management Site</h1>
+        <p class="">Welcome to my Dummy Site!! Manage you business here....</p>
+    </div>  
+    <div class="container">
+        <form class="form-horizontal" role="form" (submit)="onLoginSubmit()">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <h3 class="panel-title">Please Login <small>Here!!</small></h3>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="form-group has-danger">
+                        <label class="sr-only" for="email">Username</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <input type="text" name="username" class="form-control" id="username"
+                                   placeholder="Username" required autofocus [(ngModel)]="username">
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Password</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <input type="password" name="password" class="form-control" id="password"
+                                   placeholder="Password" required [(ngModel)]="password">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                        <!-- Put password error message here -->    
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-6" style="padding-top: .35rem">
+                    <div class="form-check mb-2 mr-sm-2 mb-sm-0">
+                        <label class="form-check-label">
+                            <input class="form-check-input" name="remember"
+                                   type="checkbox" >
+                            <span style="padding-bottom: .15rem">Remember me</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-top: 1rem">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <button type="submit" [disabled]="!username || !password" class="btn btn-success btn-block"> Login</button>
+                    <a class="btn btn-link" routerLink="/reset">Forgot Your Password?</a>
+                </div>
+            </div>
+        </form>
+    </div>  
+</main>
+  
+
+  

@@ -1,0 +1,13 @@
+.modal-header, h4, .close, .prf-card {
+    background-color: #5cb85c;
+    color:white !important;
+    text-align: center;
+    font-size: 30px;
+}
+.modal-footer {
+    background-color: #f9f9f9;
+}
+
+.close:hover{
+    color: red !important;
+}

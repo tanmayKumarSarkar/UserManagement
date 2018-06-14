@@ -1,0 +1,74 @@
+<div class="container" *ngIf="user">
+  <!---->
+
+  <div class="container">
+      <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+              <div class="well well-sm">
+                  <div class="row mt-2">
+                      <div class="col-sm-6 col-md-4">
+                          <i class="fa fa-user-circle" style="font-size:120px;color:rgb(143, 47, 221);"></i>
+                      </div>
+                      <div class="col-sm-6 col-md-8">
+                          <h4>{{user.name | titlecase}}</h4>
+                          <small><cite title="San Francisco, USA">San Francisco, USA <i class="fa fa-map-marker" style="font-size:20px;color:red;"></i></cite></small>
+                          <p>
+                            <i class="fa fa-envelope mr-2" style="font-size:20px;color:blue;"></i>{{user.email}}
+                            <br />
+                            <i class="fa fa-calendar mr-2" style="font-size:20px;color:rgb(8, 189, 99);"></i> June 02, 1988
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <br />
+  </div>
+
+  <!--profile edit/show-->
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default panel-table">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col col-xs-6">
+            <h3 class="panel-title">Profile Details</h3>
+          </div>
+          <div class="col col-xs-6 text-right">
+            <!--button type="button" class="btn btn-sm btn-primary btn-create">Update</button-->
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped table-bordered table-list">
+          <thead>
+            <tr>
+                <th class="row justify-content-md-center border-0"><i class="fa fa-address-card" style="font-size:36px;color:teal;" aria-hidden="true"></i></th>
+                <th class="hidden-xs">Username</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr> 
+          </thead>
+          <tbody>
+                  <tr>
+                    <td align="center">
+                        <button *ngIf="!isEditable" type="button" class="btn btn-sm btn-danger btn-create" (click)="editProfile()">Edit</button>
+                        <button *ngIf="isEditable" type="button" class="btn btn-sm btn-primary btn-create" 
+                        (click)="updateProfile(user._id)"
+                        [disabled]="(userS.username=='' || userS.name=='' || userS.email=='')">Update</button>
+                    </td>
+                    <td *ngIf="!isEditable">{{user.username}}</td>
+                    <td *ngIf="isEditable"><input type="text" class="form-control" id="username" required [readonly]="true" [(ngModel)]="userS.username" name="username"></td>
+                    <td *ngIf="!isEditable">{{user.name}}</td>
+                    <td *ngIf="isEditable"><input type="text" class="form-control" id="name" required [(ngModel)]="userS.name" name="name"></td>
+                    <td *ngIf="!isEditable">{{user.email}}</td>
+                    <td *ngIf="isEditable"><input type="text" class="form-control" id="email" [readonly]="true" required [(ngModel)]="userS.email" name="email"></td>
+                  </tr>
+                </tbody>
+        </table>
+    
+      </div>
+    </div>
+  </div>  
+</div>
+
+

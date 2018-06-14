@@ -1,0 +1,107 @@
+<div  class="container">
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <h4>Please login to Continue... </h4>
+          <button type="button" class="close" data-dismiss="modal" (click)="logOut()"><span>&times;</span></button>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form">
+            <div class="form-group">
+              <label for="usernameX"> Username</label>
+              <input type="text" name="usernameX" class="form-control" id="usernameX"
+                placeholder="Username" required autofocus [(ngModel)]="username">
+            </div>
+            <div class="form-group">
+              <label for="passwordX">Password</label>
+              <input type="password" name="passwordX" class="form-control" id="passwordX"
+                placeholder="Password" required [(ngModel)]="password">
+            </div>
+            <!--div class="checkbox">
+              <label><input type="checkbox" value="" checked>Remember me</label>
+            </div-->
+              <button type="submit" class="btn btn-success btn-block" data-dismiss="modal"
+                 [disabled]="!username || !password" (click)="onLoginSubmit()">Login</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-link" routerLink="/reset" data-dismiss="modal">Forgot Your Password?</a>
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal" (click)="logOut()"> Cancel</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+</div>
+<!--End Of Login Modal-->
+
+<!--Start of Idle Modal-->
+
+<div class="container mt-3">
+  
+  <!-- The Modal -->
+  <div class="modal fade" id="idleModal" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Page Inactive</h4>
+          <button type="button" class="close" data-dismiss="modal" (click)="logOut()"><span>&times;</span></button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          Do You Want To Continue....
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" > Continue</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="logOut()">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<!--End Of Idle Modal-->
+
+<!--Start of TokenAlive Modal-->
+
+<div class="container mt-3">
+  
+    <!-- The Modal -->
+    <div class="modal fade" id="tknModal" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+        
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Session Expiry</h4>
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+          </div>
+          
+          <!-- Modal body -->
+          <div class="modal-body">
+            Your session is going to be Expired in {{tknExpTime}} , Do You Want To Extend?
+          </div>
+          
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal" (click)="extendLogin()" > Extend</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    
+  </div>

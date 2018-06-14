@@ -1,0 +1,109 @@
+<div *ngIf="this.as.loggedIn() && this.as.canMngRole()" class="container" >
+  <div class="jumbotron text-center">
+    <h1 class="display-4">User Management Site</h1>
+    <p class="">Welcome to my Dummy Site!! Manage you business here....</p>
+  </div>
+
+  <div *ngIf="mgtUser" class="container">
+    <div class="row">
+        <span class="col-md-11"><h3>Profile: {{mgtUser.username}}</h3></span>
+        <span class="pull-right"><button type="button" class="btn btn-dark btn-create" routerLink="/management">Back</button></span>
+    </div>
+      <p class="">Edit User profile from here....</p>
+      <br>
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#name">Name</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#permission">Permission</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#active">Active</a>
+        </li>
+      </ul>
+    
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div id="name" class="container tab-pane active px-0">
+          <div class="card text-white bg-success mx-auto py-0" >
+            <div class="card-header">Name : {{mgtUser.name}}</div>
+            <div class="card-body">
+              <input type="text" class="form-control" id="name" required [(ngModel)]="mgtUserUp.name" name="name"><br>
+              <button type="button" class="btn btn-sm btn-warning btn-create" 
+                        (click)="updateProfile(mgtUser._id, 'name')"
+                        [disabled]="(mgtUserUp.name=='')">Update
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+        <div id="permission" class="container tab-pane fade px-0">
+          <div class="card text-white bg-info mx-auto py-0" >
+              <div class="card-header">Permission : {{mgtUser.permission}}</div>
+              <div class="card-body">
+                <!-- radio-->
+                <fieldset class="form-group">
+                    <legend>Change Permission</legend>
+                    <span class="form-check">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optPerRd" value="user" [(ngModel)]="mgtUserUp.permission">
+                        User
+                      </label>
+                    </span>
+                    <span class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optPerRd" value="moderator" [(ngModel)]="mgtUserUp.permission">
+                        Moderator
+                      </label>
+                    </span>
+                    <span *ngIf="this.as.permission == 'admin'" class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optPerRd" value="admin" [(ngModel)]="mgtUserUp.permission">
+                        Admin 
+                      </label>
+                    </span>
+                  </fieldset>
+                  <!---->
+                <button type="button" class="btn btn-sm btn-light btn-create" 
+                          (click)="updateProfile(mgtUser._id, 'permission')"
+                          [disabled]="(mgtUserUp.permission=='')">Update
+                </button>
+              </div>
+            </div>
+        </div>
+
+
+        <div id="active" class="container tab-pane fade px-0">
+          <div class="card text-white bg-dark mx-auto py-0" >
+              <div class="card-header">Active : {{mgtUser.active}}</div>
+              <div class="card-body">
+              <!-- radio-->
+              <fieldset class="form-group">
+                  <legend>Modify Profile Activation</legend>
+                  <span class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optActRd" value= true [(ngModel)]="mgtUserUp.active">
+                      Active
+                    </label>
+                  </span>
+                  <span class="form-check">
+                  <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optActRd" value= false [(ngModel)]="mgtUserUp.active">
+                      Inactive
+                    </label>
+                  </span>
+                </fieldset>
+                <!---->  
+              <button type="button" class="btn btn-sm btn-secondary btn-create" 
+                          (click)="updateProfile(mgtUser._id, 'activation')"
+                          [disabled]="(mgtUserUp.name=='')">Update
+              </button>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

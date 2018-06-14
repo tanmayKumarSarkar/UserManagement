@@ -6,20 +6,20 @@
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-        <li *ngIf="!this.as.loggedIn()" class="nav-item">
+        <li *ngIf="!isLoggedIn" class="nav-item">
             <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
-          </li>  
-          <li *ngIf="!this.as.loggedIn()" class="nav-item">
+          </li>
+          <li *ngIf="!isLoggedIn" class="nav-item">
             <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
-          </li> 
-          <!--li *ngIf="this.as.loggedIn()"  class="nav-item"><a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li-->
-          <li *ngIf="this.as.loggedIn()"  class="nav-item"><a class="nav-link" routerLink="/profile" routerLinkActive="active">Profile</a></li>
-          <li *ngIf="this.as.loggedIn() && this.as.canMngRole()"  class="nav-item"><a class="nav-link" routerLink="/management" routerLinkActive="active">Management</a></li>
-          <li *ngIf="this.as.loggedIn()" class="nav-item">
+          </li>
+          <!--li *ngIf="isLoggedIn"  class="nav-item"><a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li-->
+          <li *ngIf="isLoggedIn"  class="nav-item"><a class="nav-link" routerLink="/profile" routerLinkActive="active">Profile</a></li>
+          <li *ngIf="isLoggedIn && canMngRole()"  class="nav-item"><a class="nav-link" routerLink="/management" routerLinkActive="active">Management</a></li>
+          <li *ngIf="isLoggedIn" class="nav-item">
               <a class="nav-link" href="#" (click)="onLogoutClick()">LogOut</a>
           </li>
-          <li *ngIf="this.as.loggedIn()"  class="nav-item"><a class="nav-link active">Welcome {{this.as.getLuser().name | uppercase  }}</a></li> 
-          
+          <li *ngIf="isLoggedIn"  class="nav-item"><a class="nav-link active">Welcome {{this.as.getLuser().name | uppercase  }}</a></li>
+
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">

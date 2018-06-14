@@ -38,7 +38,7 @@ export class AuthService {
       .map(res=> res.json());
   }
 
-  loggedIn(){  
+  loggedIn(){
     if(!tokenNotExpired('id_token') || (!localStorage.getItem('id_token'))){
       localStorage.clear();
       return false;
@@ -203,7 +203,7 @@ export class AuthService {
       this.tokenTimeout = setTimeout(()=>{
         if(!$('#myModal').is(':visible')){
           $("#idleModal").modal('hide');
-          if(this.getToken() != null) 
+          if(this.getToken() != null)
           $("#tknModal").modal('show');
           this.tokenTimeout = 'complete';
         }
@@ -233,7 +233,7 @@ export class AuthService {
     return this.http.post(`${this.api}/api/deleteuser/${id}`,{username:username}, {headers: headers})
       .map(res=> res.json());
   }
-  
+
   setUserRole(){
     this.getPermission().subscribe(role=> {
       this.permission = role.permission;
@@ -256,16 +256,18 @@ export class AuthService {
   }
 
   refreshLocalUser(){
-    this.getProfileAPI().subscribe(profile =>{
-      if(profile.success){
-        this.updateUser(profile.user);
-      }else{
+    if(!this.islogOutBtn){
+      this.getProfileAPI().subscribe(profile =>{
+        if(profile.success){
+          this.updateUser(profile.user);
+        }else{
+          return false;
+        }
+      },err=>{
+        //localStorage.clear();
         return false;
-      }
-    },err=>{
-      //localStorage.clear();
-      return false;
-    });
+      });
+    }
   }
 
   logout(){

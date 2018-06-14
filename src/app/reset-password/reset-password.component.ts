@@ -22,6 +22,10 @@ export class ResetPasswordComponent implements OnInit {
     this.selected = false;
   }
 
+  validateEmail (email){
+    return this.vs.validateEmail(email);
+  }
+
   onResetSubmit(){
     if(this.selected){
       //console.log(this.email);
@@ -31,14 +35,14 @@ export class ResetPasswordComponent implements OnInit {
       this.resetObj = {username: this.username};
     }
 
-    this.as.resetPassword(this.resetObj).subscribe(data=>{      
+    this.as.resetPassword(this.resetObj).subscribe(data=>{
       if(data.success){
         this.fm.show(data.msg, {cssClass:'alert-success', timeout:6000});
         setTimeout(()=>{
           this.rt.navigate(['/login']);
         },2000);
       }else{
-        this.fm.show(data.msg, {cssClass:'alert-danger', timeout:6000}); 
+        this.fm.show(data.msg, {cssClass:'alert-danger', timeout:6000});
       }
     });
 

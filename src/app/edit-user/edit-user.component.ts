@@ -16,6 +16,7 @@ export class EditUserComponent implements OnInit {
   mgtUser;
   mgtUserUp;
   x;
+  isLoggedIn = false;
 
   constructor(private route: ActivatedRoute, private fm: FlashMessagesService, private as: AuthService, private rt: Router, private vs: ValidateService) { }
 
@@ -25,10 +26,11 @@ export class EditUserComponent implements OnInit {
     }
     this.userid = this.route.snapshot.paramMap.get('id');
     this.getUserDetails();
+    this.isLoggedIn = this.as.loggedIn();
   }
 
   getUserDetails(){
-    this.as.getUserDetailAPI(this.userid).subscribe(data=>{      
+    this.as.getUserDetailAPI(this.userid).subscribe(data=>{
       if(data.success){
         this.fm.show(data.msg, {cssClass:'alert-success', timeout:1000});
         this.validUser = true;
@@ -40,7 +42,7 @@ export class EditUserComponent implements OnInit {
           active: this.mgtUser.active == true ? 'true' : 'false'
         }
       }else{
-        this.fm.show(data.msg, {cssClass:'alert-danger', timeout:6000}); 
+        this.fm.show(data.msg, {cssClass:'alert-danger', timeout:6000});
         this.validUser = false;
         this.rt.navigate(['/profile']);
       }
@@ -67,7 +69,7 @@ export class EditUserComponent implements OnInit {
       this.fm.show("Something went wrong, Please try agin", {cssClass:'alert-danger', timeout:3000});
       return false;
     });
-    //this.as.user = this.user;    
+    //this.as.user = this.user;
   }
 
   ngAfterViewChecked(){
@@ -75,7 +77,15 @@ export class EditUserComponent implements OnInit {
       this.rt.navigate(['/profile']);
     }
   }
-  
+
+  ngAfterContentChecked() {
+    this.isLoggedIn = this.as.loggedIn();
+  }
+
+  canMngRole() {
+    return this.as.canMngRole();
+  }
+
   ngOnDestroy(){
     this.as.refreshLocalUser();
   }

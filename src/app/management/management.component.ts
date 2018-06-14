@@ -25,9 +25,10 @@ export class ManagementComponent implements OnInit {
   listActivePage;
   listSearch;
   listSortAsc;
-  
+  isLoggedIn = false;
 
-  constructor(private as: AuthService, private rt: Router) { 
+
+  constructor(private as: AuthService, private rt: Router) {
     this.Math = Math;
   }
 
@@ -37,6 +38,11 @@ export class ManagementComponent implements OnInit {
     }
     this.user = this.as.user;
     this.users = this.loadUsers();
+    this.isLoggedIn = this.as.loggedIn();
+  }
+
+  ngAfterContentChecked() {
+    this.isLoggedIn = this.as.loggedIn();
   }
 
   loadUsers(){
@@ -48,12 +54,12 @@ export class ManagementComponent implements OnInit {
         this.listActivePage = 0;
         if(this.user.permission == 'admin'){
           this.canDelete = true;
-          this.canEdit = true;          
+          this.canEdit = true;
         }if(this.user.permission == 'moderator'){
           this.canDelete = false;
           this.canEdit = true;
         }
-        
+
       }else{
         //localStorage.clear();
       }
@@ -98,7 +104,7 @@ export class ManagementComponent implements OnInit {
         index: arrLen - i,
         listStart: first,
         listEnd: (first + limit) > end ? (first +(end% limit)) : (first + limit)
-      }); 
+      });
       first = first + limit;
     }
   }
@@ -114,10 +120,10 @@ export class ManagementComponent implements OnInit {
       this.as.deleteUserAPI(user._id).subscribe(result =>{
         if(result.success){
           // let filterSize = this.listLimit;
-          // this.loadUsers();   
+          // this.loadUsers();
           // this.listLimit = filterSize;  console.log(filterSize, 'LL : ', this.listLimit);
           const index = this.users.indexOf(result.user);
-          this.users.splice(index, 1); 
+          this.users.splice(index, 1);
           this.bckUsers = this.users;
           this.applyFilter();
         }else{
@@ -172,7 +178,7 @@ export class ManagementComponent implements OnInit {
         if(obj1[val] > obj2[val]) return -1;
         return 0;
       });
-    }    
+    }
 
   }
 
@@ -180,6 +186,10 @@ export class ManagementComponent implements OnInit {
     if(this.as.isNewlyLoaded || this.as.permission == undefined || this.as.permission == '' || (this.as.permission != 'admin' && this.as.permission != 'moderator')){
       this.rt.navigate(['/profile']);
     }
+  }
+
+  canMngRole() {
+    return this.as.canMngRole();
   }
 
   ngOnDestroy(){

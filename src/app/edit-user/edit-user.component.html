@@ -1,4 +1,4 @@
-<div *ngIf="this.as.loggedIn() && this.as.canMngRole()" class="container" >
+<div *ngIf="isLoggedIn && canMngRole()" class="container" >
   <div class="jumbotron text-center">
     <h1 class="display-4">User Management Site</h1>
     <p class="">Welcome to my Dummy Site!! Manage you business here....</p>
@@ -23,7 +23,7 @@
           <a class="nav-link" data-toggle="tab" href="#active">Active</a>
         </li>
       </ul>
-    
+
       <!-- Tab panes -->
       <div class="tab-content">
         <div id="name" class="container tab-pane active px-0">
@@ -31,7 +31,7 @@
             <div class="card-header">Name : {{mgtUser.name}}</div>
             <div class="card-body">
               <input type="text" class="form-control" id="name" required [(ngModel)]="mgtUserUp.name" name="name"><br>
-              <button type="button" class="btn btn-sm btn-warning btn-create" 
+              <button type="button" class="btn btn-sm btn-warning btn-create"
                         (click)="updateProfile(mgtUser._id, 'name')"
                         [disabled]="(mgtUserUp.name=='')">Update
               </button>
@@ -62,12 +62,12 @@
                     <span *ngIf="this.as.permission == 'admin'" class="form-check">
                     <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="optPerRd" value="admin" [(ngModel)]="mgtUserUp.permission">
-                        Admin 
+                        Admin
                       </label>
                     </span>
                   </fieldset>
                   <!---->
-                <button type="button" class="btn btn-sm btn-light btn-create" 
+                <button type="button" class="btn btn-sm btn-light btn-create"
                           (click)="updateProfile(mgtUser._id, 'permission')"
                           [disabled]="(mgtUserUp.permission=='')">Update
                 </button>
@@ -96,8 +96,8 @@
                     </label>
                   </span>
                 </fieldset>
-                <!---->  
-              <button type="button" class="btn btn-sm btn-secondary btn-create" 
+                <!---->
+              <button type="button" class="btn btn-sm btn-secondary btn-create"
                           (click)="updateProfile(mgtUser._id, 'activation')"
                           [disabled]="(mgtUserUp.name=='')">Update
               </button>

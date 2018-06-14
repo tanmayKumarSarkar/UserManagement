@@ -11,8 +11,11 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
 
+  isLoggedIn = false;
+
   constructor(private vs : ValidateService, private fm: FlashMessagesService, private as: AuthService, private rt: Router) { }
   ngOnInit() {
+    this.isLoggedIn = this.as.loggedIn();
   }
 
   onLogoutClick(){
@@ -20,6 +23,14 @@ export class NavComponent implements OnInit {
     this.fm.show("Logged Out", {cssClass:'alert-success', timeout:3000});
     this.rt.navigate(['/login']);
     return false;
+  }
+
+  ngAfterContentChecked() {
+    this.isLoggedIn = this.as.loggedIn();
+  }
+
+  canMngRole() {
+    return this.as.canMngRole();
   }
 
 }

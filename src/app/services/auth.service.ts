@@ -3,6 +3,7 @@ import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { SessionCheckService } from './session-check.service';
+import { environment } from '../../environments/environment';
 declare var $: any;
 
 @Injectable()
@@ -10,7 +11,7 @@ export class AuthService {
 
   authToken : any;
   user: { id:String, name: String,username: String,email: String, permission: String}
-  api: String = 'http://localhost:3000' || '';
+  api: String = environment.production ? '' : 'http://localhost:3000';
   islogOutBtn: Boolean = false;
   tknExpTime;
   tknExpNtfyTime = 2*60*1000;  //mili seconds

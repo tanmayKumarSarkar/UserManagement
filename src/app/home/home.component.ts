@@ -11,10 +11,13 @@ export class HomeComponent implements OnInit {
 
   constructor(private as: AuthService, private rt: Router) { }
 
+  isLoggedIn = false;
+
   ngOnInit() {
     if(this.as.isNewlyLoaded && this.as.loggedIn()){
       this.rt.navigate(['/profile']);
       }
+      this.isLoggedIn = this.as.loggedIn();
   }
 
   ngOnDestroy(){

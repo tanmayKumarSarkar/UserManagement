@@ -37,7 +37,7 @@ router.post('/users', (req, res)=>{
     //const eurl = `${req.protocol}://${req.headers.host}/confirmation/${user.temptoken}`;
     //const eurl = `${hurl}/confirmation/${user.temptoken}`;
     //console.log(req.protocol , " ", req.headers.host, " ", req.get('Host'), " ", req.hostname);
-    const eurl = (environment == 'PROD') ? `${req.protocol}://${req.headers.host}/confirmation/${user.temptoken}` : `${hurl}/confirmation/${user.temptoken}`;
+    const eurl = (environment == 'PROD') ? `https://${req.headers.host}/confirmation/${user.temptoken}` : `${hurl}/confirmation/${user.temptoken}`;
     if(validateRegister(user)){
         user.save((err, callback)=>{
             if (err) {
@@ -110,7 +110,7 @@ router.get('/resendconfirmation/:email', (req, res)=>{
                 }else{
                     //const eurl = `${hurl}/confirmation/${token}`;
                     //const eurl = `${req.protocol}://${req.headers.host}/confirmation/${token}`;
-                    const eurl = (environment == 'PROD') ? `${req.protocol}://${req.headers.host}/confirmation/${token}` : `${hurl}/confirmation/${token}`;
+                    const eurl = (environment == 'PROD') ? `https://${req.headers.host}/confirmation/${token}` : `${hurl}/confirmation/${token}`;
                     User.findOneAndUpdate({email: req.params.email}, {$set:{temptoken:token}}, {new: true}, (err, user)=>{
                         if(user == null) {
                             res.json({success: false, msg: 'User Not Registered, Please Register Yourself'});
@@ -189,7 +189,7 @@ router.post('/reset', (req, res)=>{
                 }else{
                     //const eurl = `${hurl}/new/${token}`;
                     //const eurl = `${req.protocol}://${req.headers.host}/new/${token}`;
-                    const eurl = (environment == 'PROD') ? `${req.protocol}://${req.headers.host}/new/${token}` : `${hurl}/new/${token}`;
+                    const eurl = (environment == 'PROD') ? `https://${req.headers.host}/new/${token}` : `${hurl}/new/${token}`;
                     User.findOneAndUpdate(req.body, {$set:{temptoken:token}}, {new: true}, (err, user)=>{
                         if(user == null) {
                             res.json({success: false, msg: 'User Not Registered, Please Register Yourself'});
